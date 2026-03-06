@@ -6,6 +6,15 @@
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
+## 開發命令
+
+```bash
+uv run test
+uv run pytest
+```
+
+`uv test` 不是專案命令；請使用上面的其中一個。
+
 ## 🎯 Vision
 
 **Atomic Workflow** 將每一個作業流程拆解為不可再分的「原子步驟」（Atomic Steps），透過：
