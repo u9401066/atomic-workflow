@@ -1,0 +1,53 @@
+# 環境變數
+.env
+.env.local
+.env.*.local
+
+# Python 依賴 & 虛擬環境
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Node / Extension
+node_modules/
+extension/out/
+*.vsix
+
+# 編輯器
+*.swp
+*.swo
+*~
+.idea/
+*.sublime-*
+
+# 系統
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 日誌
+*.log
+logs/
+
+# 暫存
+*.tmp
+*.temp
+*.cache
+
+# 測試覆蓋率
+coverage/
+.coverage
+htmlcov/
+
+# 敏感資料
+*.pem
+*.key
+secrets/
+
+# Snapshot rollback (§12.3)
+.atomic-workflow/
