@@ -1,5 +1,10 @@
 {
     "chat.agent.enabled": true,
+    "python.analysis.extraPaths": [
+        "./src",
+        "."
+    ],
+    "python.testing.pytestEnabled": true,
     
     // 自動使用自定義指令檔案
     "github.copilot.chat.codeGeneration.useInstructionFiles": true,

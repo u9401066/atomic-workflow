@@ -8,8 +8,9 @@
 
 from __future__ import annotations
 
-import subprocess
 import sys
+
+from scripts.hooks.framework import CheckResult, emit, get_staged_files, is_path_exempt
 
 MAX_FILES = 30
 EXEMPT_PATTERNS = [
@@ -20,34 +21,33 @@ EXEMPT_PATTERNS = [
 ]
 
 
-def get_staged_files() -> list[str]:
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only", "--diff-filter=ACMR"],
-        capture_output=True,
-        text=True,
-    )
-    return [f for f in result.stdout.strip().splitlines() if f]
-
-
-def is_exempt(filepath: str) -> bool:
-    return any(filepath.startswith(p) or filepath == p for p in EXEMPT_PATTERNS)
-
-
 def main() -> int:
     staged = get_staged_files()
-    counted = [f for f in staged if not is_exempt(f)]
+    counted = [f for f in staged if not is_path_exempt(f, EXEMPT_PATTERNS)]
 
     if len(counted) > MAX_FILES:
-        print(f"\n❌ Commit 包含 {len(counted)} 個檔案（上限 {MAX_FILES}）")
-        print("   豁免項目不計入：uv.lock, htmlcov/, memory-bank/")
-        print("\n📋 建議：")
-        print("   1. 拆分為多個 focused commits")
-        print("   2. 使用 git add -p 部分暫存")
-        print(f"   3. 緊急繞過：git commit --no-verify\n")
-        return 1
+        return emit(
+            CheckResult(
+                success=False,
+                summary=f"❌ Commit 包含 {len(counted)} 個檔案（上限 {MAX_FILES}）",
+                details=(
+                    "   豁免項目不計入：uv.lock, htmlcov/, memory-bank/",
+                    "",
+                    "📋 建議：",
+                    "   1. 拆分為多個 focused commits",
+                    "   2. 使用 git add -p 部分暫存",
+                    "   3. 緊急繞過：git commit --no-verify",
+                ),
+            )
+        )
 
     if counted:
-        print(f"✅ Commit 大小合規：{len(counted)}/{MAX_FILES} 檔案")
+        return emit(
+            CheckResult(
+                success=True,
+                summary=f"✅ Commit 大小合規：{len(counted)}/{MAX_FILES} 檔案",
+            )
+        )
     return 0
 
 

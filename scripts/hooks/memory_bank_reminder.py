@@ -7,17 +7,9 @@
 
 from __future__ import annotations
 
-import subprocess
 import sys
 
-
-def get_staged_files() -> list[str]:
-    result = subprocess.run(
-        ["git", "diff", "--cached", "--name-only"],
-        capture_output=True,
-        text=True,
-    )
-    return [f for f in result.stdout.strip().splitlines() if f]
+from scripts.hooks.framework import CheckResult, emit, get_staged_files
 
 
 def main() -> int:
@@ -32,10 +24,17 @@ def main() -> int:
     has_memory_changes = any(f.startswith("memory-bank/") for f in staged)
 
     if has_src_changes and not has_memory_changes:
-        print("\n⚠️  Memory Bank 未同步！")
-        print("   偵測到程式碼變更但 memory-bank/ 沒有更新。")
-        print("   建議：使用 Copilot 執行「更新 memory bank」或「MB」")
-        print("   （此提醒不會阻擋 commit）\n")
+        emit(
+            CheckResult(
+                success=True,
+                summary="⚠️  Memory Bank 未同步！",
+                details=(
+                    "   偵測到程式碼變更但 memory-bank/ 沒有更新。",
+                    "   建議：使用 Copilot 執行「更新 memory bank」或「MB」",
+                    "   （此提醒不會阻擋 commit）",
+                ),
+            )
+        )
 
     return 0  # 永遠不阻擋
 

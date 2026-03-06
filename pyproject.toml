@@ -55,6 +55,8 @@ streamlit = [
 # === 入口點 ===
 [project.scripts]
 atomic-workflow = "atomic_workflow.mcp:main"
+atomic-workflow-cli = "atomic_workflow.cli:main"
+test = "pytest:console_main"
 
 # === 建置系統 ===
 [build-system]
@@ -67,16 +69,6 @@ packages = ["src/atomic_workflow"]
 # ============================================================
 # 工具配置
 # ============================================================
-
-# === uv 配置 ===
-[tool.uv]
-dev-dependencies = [
-    "pytest>=8.0",
-    "pytest-cov>=5.0",
-    "ruff>=0.8",
-    "mypy>=1.10",
-    "pre-commit>=3.7",
-]
 
 # === Ruff (Linter + Formatter) ===
 [tool.ruff]
