@@ -1,0 +1,93 @@
+{
+  "name": "atomic-workflow",
+  "displayName": "Atomic Workflow",
+  "description": "Clinical workflow decomposition, variant overlay, and interactive visual redesign editor",
+  "version": "0.1.0",
+  "publisher": "atomic-workflow",
+  "license": "Apache-2.0",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:**/workflows/**/phase-*.md",
+    "workspaceContains:**/workflows/**/variants/*.md"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "atomicWorkflow",
+          "title": "Atomic Workflow",
+          "icon": "$(symbol-structure)"
+        }
+      ]
+    },
+    "views": {
+      "atomicWorkflow": [
+        {
+          "id": "atomicWorkflow.phaseTree",
+          "name": "Phases & Steps"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "atomicWorkflow.openEditor",
+        "title": "Open Workflow Editor",
+        "category": "Atomic Workflow"
+      },
+      {
+        "command": "atomicWorkflow.validateDomain",
+        "title": "Validate Workflow Domain",
+        "category": "Atomic Workflow"
+      },
+      {
+        "command": "atomicWorkflow.refreshTree",
+        "title": "Refresh Phase Tree",
+        "category": "Atomic Workflow",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "atomicWorkflow.openPhaseGraph",
+        "title": "Open Phase Graph",
+        "category": "Atomic Workflow",
+        "icon": "$(graph)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "atomicWorkflow.refreshTree",
+          "when": "view == atomicWorkflow.phaseTree",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "atomicWorkflow.openPhaseGraph",
+          "when": "view == atomicWorkflow.phaseTree && viewItem == phase",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "npm run build:ext && npm run build:webview",
+    "build:ext": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap",
+    "build:webview": "cd webview-ui && npm run build",
+    "watch": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "lint": "tsc --noEmit",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.4.0"
+  }
+}
