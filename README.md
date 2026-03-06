@@ -4,7 +4,7 @@
 >
 > 將結構化 Markdown SOP 轉化為可視覺化、可查詢、可連接外部資料庫的智慧工作流程系統。
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 ## 🎯 Vision
 
@@ -286,7 +286,7 @@ atomic-workflow/
 
 ## 📝 License
 
-MIT License — see [LICENSE](LICENSE) for details.
+Apache License 2.0 — see [LICENSE](LICENSE) for details.
 
 ## 👤 Author
 
