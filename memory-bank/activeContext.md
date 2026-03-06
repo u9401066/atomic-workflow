@@ -2,23 +2,23 @@
 
 ## Current Focus
 
-**互動式 MVP 已完成建構。** Python core engine（parser → resolver → validator → graph → MCP → CLI）+ VS Code extension（TreeView + React Flow webview）全部可建構。
+**互動式 MVP 完成並驗證。** Python core engine + VS Code extension + VSIX 打包 + 端對端驗證 全數通過。
 
 已完成的完整實作堆疊：
 
 - **Python Core Engine**：domain models、baseline/variant parser、resolver、repository、service facade、validator、graph generator、serialization、CLI、MCP server（6 read tools）
 - **VS Code Extension**：extension host（TreeView + EditorPanel + McpClient）、React 19 + React Flow webview（StepNode + DecisionNode custom nodes）
-- **Tests**：16/16 通過（4 unit + 4 integration suites）
+- **Tests**：16/16 Python 測試通過 + React webview-ui 測試完成
 - **Build**：esbuild (extension host)、Vite (webview-ui) 全部建構成功
-- **Git**：3 個結構化 commits 已推送
+- **VSIX**：atomic-workflow-0.1.0.vsix (537.53 KB) 已打包並安裝驗證
+- **Git**：結構化 commits 已推送
 
 ## Recently Changed Files
 
-- `src/atomic_workflow/` — 完整 Python core engine
-- `tests/` — 16 個測試（unit + integration）
-- `extension/` — VS Code extension host + React Flow webview
-- `pyproject.toml` — scripts + dependencies
-- `.github/*.chatmode.md` — agent chatmode definitions
+- `extension/.vscodeignore` — 新增 VSIX 打包排除規則
+- `extension/LICENSE` — 複製自專案根目錄
+- `extension/package.json` — 新增 vitest, vsce, coverage 依賴；升級 esbuild
+- `extension/webview-ui/package.json` — 新增測試依賴
 
 ## Current Blockers
 

@@ -15,6 +15,10 @@
 - Extension 建構驗證通過：esbuild → dist/extension.js (14kb)、Vite → dist/webview/ (381kb + 16kb CSS)
 - 全部 16/16 Python 測試通過
 - 已推送 3 個結構化 commits：core engine + tests + extension
+- VSIX 打包成功：atomic-workflow-0.1.0.vsix (537.53 KB)
+- Extension 已安裝到 VS Code Insiders 驗證通過
+- 端對端驗證通過：CLI list-domains/list-steps/validate-workflow 全數正常
+- React webview-ui 測試完成
 
 ## Doing
 
@@ -22,6 +26,5 @@
 
 ## Next
 
-- Extension 端對端測試（安裝到 VS Code 驗證 TreeView 與 Webview 載入）
 - MCP write tools（§11.5 的 17 個寫入工具）
 - Streamlit dashboard（Phase 2）
